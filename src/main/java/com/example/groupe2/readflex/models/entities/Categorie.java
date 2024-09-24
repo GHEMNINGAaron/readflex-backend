@@ -19,8 +19,8 @@ public class Categorie {
     @Column(name = "name",nullable = false,unique = true)
     private String name;
 
-    @OneToMany(mappedBy = "categorie")  // Une catégorie peut avoir plusieurs films
-    private List<> films;
+    //@OneToMany(mappedBy = "categorie")  // Une catégorie peut avoir plusieurs films
+    //private List<> films;
     public Categorie() {}
 
     public Categorie(String name) {
