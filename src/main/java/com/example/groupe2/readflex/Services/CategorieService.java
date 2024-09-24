@@ -1,6 +1,6 @@
 package com.example.groupe2.readflex.Services;
 
-import com.example.groupe2.readflex.models.Categorie;
+import com.example.groupe2.readflex.models.entities.Categorie;
 import com.example.groupe2.readflex.repositories.CategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
