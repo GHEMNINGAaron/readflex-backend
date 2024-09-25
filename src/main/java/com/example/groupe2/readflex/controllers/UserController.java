@@ -1,6 +1,6 @@
 package com.example.groupe2.readflex.controllers;
 
-import com.example.groupe2.readflex.Services.UserService;
+import com.example.groupe2.readflex.services.UserService;
 import com.example.groupe2.readflex.mappers.UserMapper;
 import com.example.groupe2.readflex.models.dto.UserDto;
 import com.example.groupe2.readflex.models.entities.User;
