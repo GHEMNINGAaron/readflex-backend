@@ -114,9 +114,7 @@ public class UserService {
         Optional<User> userData = userRepository.findByUsername(username);
         if(userData.isPresent()){
             User _user = userData.get();
-            if(securityService.VerifyPassword(password, _user.getPassword())){
-                return true;
-            }
+            return securityService.VerifyPassword(password, _user.getPassword());
         }
         return false;
     }
