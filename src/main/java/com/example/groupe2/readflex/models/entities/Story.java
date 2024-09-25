@@ -1,4 +1,4 @@
-package com.example.groupe2.readflex.models;
+package com.example.groupe2.readflex.models.entities;
 
 
 import jakarta.persistence.*;
@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,4 +32,10 @@ public class Story {
     @Column(name = "storyContent")
     private String storyContent;
 
+    @ManyToOne  // Plusieurs films peuvent appartenir à une catégorie
+    @JoinColumn(name = "categorie_id")
+    private Categorie categorie;
+
+    @ManyToMany(mappedBy = "Favorite_Stories")  // Un film peut être préféré par plusieurs utilisateurs
+    private List<User> users;
 }

@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -19,8 +21,10 @@ public class Categorie {
     @Column(name = "name",nullable = false,unique = true)
     private String name;
 
-    //@OneToMany(mappedBy = "categorie")  // Une catégorie peut avoir plusieurs films
-    //private List<> films;
+    @OneToMany(mappedBy = "categorie")  // Une catégorie peut avoir plusieurs films
+    private List<Story> storys;
+
+
     public Categorie() {}
 
     public Categorie(String name) {
@@ -28,7 +32,6 @@ public class Categorie {
     }
 
 
-    //TODO : ajouter la liste des films assosier????
 
 
 

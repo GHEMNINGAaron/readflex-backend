@@ -3,6 +3,8 @@ package com.example.groupe2.readflex.models.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -23,7 +25,12 @@ public class User {
     private boolean isAdmin;
 
     //TODO : ajouter la liste des films qui prefere l'utilisateur
-    //List<Film> Favorite_Films= new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "user_story_favorite",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "story_id"))
+    List<Story> Favorite_Stories;
 
 
     public User() {}
@@ -42,12 +49,6 @@ public class User {
     public void setAdmin(boolean status) {
         isAdmin = status;
     }
-
-
-
-
-
-
 
 
 }
