@@ -1,4 +1,4 @@
-package com.example.groupe2.readflex.Services;
+package com.example.groupe2.readflex.services;
 
 import com.example.groupe2.readflex.configuration.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +12,14 @@ public class SecurityService {
     @Autowired
     SecurityConfig securityConfig;
 
-    PasswordEncoder encoder = securityConfig.passwordEncoder();
 
     public String HashPassword(String password) {
+        PasswordEncoder encoder = securityConfig.passwordEncoder();
         return encoder.encode(password);
     }
 
     public Boolean VerifyPassword(String password, String hashedPassword) {
+        PasswordEncoder encoder = securityConfig.passwordEncoder();
         return encoder.matches(password, hashedPassword);
     }
 

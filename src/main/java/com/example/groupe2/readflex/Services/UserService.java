@@ -1,4 +1,4 @@
-package com.example.groupe2.readflex.Services;
+package com.example.groupe2.readflex.services;
 
 import com.example.groupe2.readflex.models.entities.User;
 import com.example.groupe2.readflex.repositories.UserRepository;
@@ -13,6 +13,7 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
     @Autowired
     SecurityService securityService;
 
