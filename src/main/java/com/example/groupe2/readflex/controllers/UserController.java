@@ -1,5 +1,6 @@
 package com.example.groupe2.readflex.controllers;
 
+import com.example.groupe2.readflex.models.dto.LoginRequest;
 import com.example.groupe2.readflex.services.UserService;
 import com.example.groupe2.readflex.mappers.UserMapper;
 import com.example.groupe2.readflex.models.dto.UserDto;
@@ -35,7 +36,6 @@ public class UserController {
 
             }
         } catch (Exception e) {
-            e.printStackTrace();
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -105,6 +105,17 @@ public class UserController {
             return ResponseEntity.ok(userDto);
         }
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<Boolean> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        boolean isAuthenticated = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
+
+        if (isAuthenticated) {
+            return ResponseEntity.ok(true);  // Authentification réussie
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);  // Échec de l'authentification
+        }
     }
 
 }
