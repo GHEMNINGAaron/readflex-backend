@@ -1,6 +1,6 @@
 package com.example.groupe2.readflex.controllers;
 
-import com.example.groupe2.readflex.Services.CategorieService;
+import com.example.groupe2.readflex.services.CategorieService;
 import com.example.groupe2.readflex.models.entities.Categorie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

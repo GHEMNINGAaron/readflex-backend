@@ -4,6 +4,8 @@ import com.example.groupe2.readflex.models.dto.UserDto;
 import com.example.groupe2.readflex.models.entities.User;
 
 public class UserMapper {
+
+
     public static UserDto toUserDto(User user) {
         if(user != null) {
             return new UserDto(

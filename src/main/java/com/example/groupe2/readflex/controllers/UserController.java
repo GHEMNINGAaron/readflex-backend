@@ -22,6 +22,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
+//    TODO ???
     @GetMapping("/get/all")
     public ResponseEntity<List<UserDto>> getAllUsers(){
         List<User> _users = userService.getAllUsers();
@@ -71,11 +72,12 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user){
+    public ResponseEntity<UserDto> createUser(@RequestBody User user){
         if(user == null) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(userService.saveUser(user));
+        UserDto userDto = UserMapper.toUserDto(userService.saveUser(user));
+        return ResponseEntity.ok(userDto);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -83,8 +85,8 @@ public class UserController {
         if(id == null) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-        User _user = userService.deleteUser(id);
-        return new ResponseEntity<>(_user, HttpStatus.OK);
+        userService.deleteUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/update/{id}")
@@ -112,9 +114,9 @@ public class UserController {
         boolean isAuthenticated = userService.authenticateUser(loginRequest.getUsername(), loginRequest.getPassword());
 
         if (isAuthenticated) {
-            return ResponseEntity.ok(true);  // Authentification réussie
+            return ResponseEntity.ok(true);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);  // Échec de l'authentification
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
         }
     }
 

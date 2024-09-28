@@ -1,4 +1,4 @@
-package com.example.groupe2.readflex.Services;
+package com.example.groupe2.readflex.services;
 
 import com.example.groupe2.readflex.models.entities.Categorie;
 import com.example.groupe2.readflex.repositories.CategorieRepository;
