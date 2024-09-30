@@ -13,7 +13,6 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     SecurityService securityService;
 
@@ -92,6 +91,7 @@ public class UserService {
         }
         return null;
     }
+
 
 
     public User change_user_status(long id){
