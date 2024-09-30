@@ -92,6 +92,9 @@ public class UserController {
     @PutMapping("/update/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long id, @RequestBody User user){
         if (user != null &&  id != null ){
+            if(userService.getUserById(id).isAdmin()) {
+                user.setAdmin(true);
+            }
             User _user = userService.updateUser(id, user);
             UserDto userDto = UserMapper.toUserDto(_user);
             return ResponseEntity.ok(userDto);
