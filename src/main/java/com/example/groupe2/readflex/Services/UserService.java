@@ -118,14 +118,17 @@ public class UserService {
         return false;
     }
 
-    public void changePassword(String username,String oldPassword, String newPassword){
+    public Boolean changePassword(String username,String oldPassword, String newPassword){
+        boolean result=false;
         Optional<User> userData = userRepository.findByUsername(username);
         if(userData.isPresent()){
             User _user = userData.get();
             if(securityService.VerifyPassword(oldPassword,_user.getPassword())){
                 _user.setPassword(securityService.HashPassword(newPassword));
+                userRepository.save(_user);
+                result = true;
             }
-            userRepository.save(_user);
         }
+        return result;
     }
 }

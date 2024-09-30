@@ -17,13 +17,14 @@ public class SecurityService {
     public String HashPassword(String password) {
 
         PasswordEncoder encoder = securityConfig.passwordEncoder();
-        //TODO : password = prefix+ password + suffix;
+        //TODO :
+        password = prefix+ password + suffix;
         return encoder.encode(password);
     }
 
     public Boolean VerifyPassword(String password, String hashedPassword) {
         PasswordEncoder encoder = securityConfig.passwordEncoder();
-        //TODO : password = prefix+ password + suffix;
+        password = prefix+ password + suffix;
         return encoder.matches(password, hashedPassword);
     }
 

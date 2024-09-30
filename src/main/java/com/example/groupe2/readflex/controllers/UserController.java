@@ -1,6 +1,7 @@
 package com.example.groupe2.readflex.controllers;
 
 import com.example.groupe2.readflex.models.dto.LoginRequest;
+import com.example.groupe2.readflex.models.dto.PasswordRequest;
 import com.example.groupe2.readflex.services.UserService;
 import com.example.groupe2.readflex.mappers.UserMapper;
 import com.example.groupe2.readflex.models.dto.UserDto;
@@ -22,7 +23,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-//    TODO ???
+
     @GetMapping("/get/all")
     public ResponseEntity<List<UserDto>> getAllUsers(){
         List<User> _users = userService.getAllUsers();
@@ -123,14 +124,16 @@ public class UserController {
         }
     }
 
-    //TODO : regler les parametres  de la methode
-    @PutMapping("/updatePassword")
-    public ResponseEntity changePassword(String username, String oldPassword, String newPassword){
-        if(!username.isBlank() || !oldPassword.isBlank() || !newPassword.isBlank()) {
-            userService.changePassword(username, oldPassword, newPassword);
-            return new ResponseEntity<>(null, HttpStatus.OK);
+    @PutMapping("/updatePassword/{username}")
+    public ResponseEntity<Boolean> changePassword(@PathVariable("username") String username, @RequestBody PasswordRequest passRequest){
+        if(!username.isBlank() && !passRequest.getOldPassword().isBlank() && !passRequest.getNewPassword().isBlank()) {
+            boolean result =userService.changePassword(username, passRequest.getOldPassword(), passRequest.getNewPassword());
+            if(result){
+                return new ResponseEntity<>(result, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
 
 }

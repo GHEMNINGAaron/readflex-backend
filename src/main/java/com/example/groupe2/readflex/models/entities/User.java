@@ -24,7 +24,6 @@ public class User {
     @Column(name = "isAdmin", nullable = false, columnDefinition = "boolean default false")
     private boolean isAdmin;
 
-    //TODO : ajouter la liste des films qui prefere l'utilisateur
     @ManyToMany
     @JoinTable(
             name = "user_story_favorite",

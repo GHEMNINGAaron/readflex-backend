@@ -16,27 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig  {
 
 
-    /*   @Bean
-      public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-  //        http.csrf(AbstractHttpConfigurer::disable)
-  //                .authorizeHttpRequests((requests) -> requests
-  //                        .anyRequest().permitAll()
-  //
-  //                );
-          //http.formLogin().disable();
-          http.csrf(AbstractHttpConfigurer::disable)
-                  .authorizeHttpRequests()
-                  .anyRequest().permitAll()
-                  .and().formLogin().disable()
-                  .httpBasic().disable();
-          rrn http.build();
-      }
-  /*        http.csrf(AbstractHttpConfigurer::disable)
-              .authorizeHttpRequests()
-              .anyRequest().permitAll()
-              .and().formLogin().disable()
-              .httpBasic().disable();
-  */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -51,5 +30,3 @@ public class SecurityConfig  {
         return new BCryptPasswordEncoder();
     }
 }
-
-//TODO : desactiver le password par defaut

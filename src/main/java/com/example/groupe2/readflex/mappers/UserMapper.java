@@ -9,6 +9,7 @@ public class UserMapper {
     public static UserDto toUserDto(User user) {
         if(user != null) {
             return new UserDto(
+                    user.getId(),
                     user.getUsername(),
                     user.getEmail(),
                     user.isAdmin()
