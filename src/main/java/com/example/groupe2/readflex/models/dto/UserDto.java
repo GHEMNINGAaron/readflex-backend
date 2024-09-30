@@ -9,13 +9,15 @@ import lombok.Setter;
 @Setter
 public class UserDto {
 
+    private Long id;
     private String username;
     private String email;
     private boolean isAdmin;
 
 
     public UserDto() {}
-    public UserDto(String username, String email, boolean isAdmin) {
+    public UserDto(Long id,String username, String email, boolean isAdmin) {
+        this.id = id;
         this.username = username;
         this.email = email;
         this.isAdmin = isAdmin;
@@ -25,9 +27,8 @@ public class UserDto {
     public boolean isAdmin() {
         return isAdmin;
     }
-
-
     public void setStatus(boolean status) {
         isAdmin = status;
     }
+
 }
