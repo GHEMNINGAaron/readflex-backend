@@ -65,15 +65,13 @@ public class UserService {
         return null;
     }
 
-    public User deleteUser(Long id){
+    public void deleteUser(Long id){
         if(id != null) {
             Optional<User> _user = userRepository.findById(id);
             if(_user.isPresent()) {
                 userRepository.deleteById(id);
-                return _user.get();
             }
         }
-        return null;
     }
 
     public User updateUser(Long id , User user){
@@ -82,11 +80,12 @@ public class UserService {
             User _user =DataUser.get();
             if(user.getEmail() != null) _user.setEmail(user.getEmail());
             if (user.getUsername() != null) _user.setUsername(user.getUsername());
-            if (user.getPassword() != null) {
-                String hashedPassword = securityService.HashPassword (user.getPassword());
-                _user.setPassword(hashedPassword);
-            }
             _user.setAdmin(user.isAdmin());
+//            if (user.getPassword() != null) {
+//                String hashedPassword = securityService.HashPassword (user.getPassword());
+//                _user.setPassword(hashedPassword);
+//            }
+
             return userRepository.save(_user);
         }
         return null;
@@ -119,6 +118,14 @@ public class UserService {
         return false;
     }
 
-
-
+    public void changePassword(String username,String oldPassword, String newPassword){
+        Optional<User> userData = userRepository.findByUsername(username);
+        if(userData.isPresent()){
+            User _user = userData.get();
+            if(securityService.VerifyPassword(oldPassword,_user.getPassword())){
+                _user.setPassword(securityService.HashPassword(newPassword));
+            }
+            userRepository.save(_user);
+        }
+    }
 }

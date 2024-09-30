@@ -11,7 +11,7 @@ public class SecurityService {
     @Autowired
     SecurityConfig securityConfig;
 
-    private final String  prefix = "X_#";
+    private final String  prefix = "X9_#";
     private final String  suffix = "&-0";
 
     public String HashPassword(String password) {
