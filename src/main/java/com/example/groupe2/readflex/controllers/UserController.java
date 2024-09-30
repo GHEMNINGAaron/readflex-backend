@@ -123,4 +123,14 @@ public class UserController {
         }
     }
 
+    //TODO : regler les parametres  de la methode
+    @PutMapping("/updatePassword")
+    public ResponseEntity changePassword(String username, String oldPassword, String newPassword){
+        if(!username.isBlank() || !oldPassword.isBlank() || !newPassword.isBlank()) {
+            userService.changePassword(username, oldPassword, newPassword);
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+    }
+
 }
