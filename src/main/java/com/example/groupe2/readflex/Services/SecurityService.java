@@ -17,7 +17,6 @@ public class SecurityService {
     public String HashPassword(String password) {
 
         PasswordEncoder encoder = securityConfig.passwordEncoder();
-        //TODO :
         password = prefix+ password + suffix;
         return encoder.encode(password);
     }

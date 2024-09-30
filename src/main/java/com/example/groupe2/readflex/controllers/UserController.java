@@ -135,5 +135,13 @@ public class UserController {
         }
         return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
     }
-
+    @PostMapping("/{userId}/favorite-stories/{storyId}")
+    public ResponseEntity<String> addStoryToFavorites(@PathVariable Long userId, @PathVariable Long storyId) {
+        try {
+            userService.addStoryToFavorites(userId, storyId);
+            return ResponseEntity.ok("Histoire ajoutée aux favoris avec succès !");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 }
