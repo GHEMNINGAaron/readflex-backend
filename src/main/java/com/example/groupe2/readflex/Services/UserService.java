@@ -1,6 +1,8 @@
 package com.example.groupe2.readflex.services;
 
+import com.example.groupe2.readflex.models.entities.Story;
 import com.example.groupe2.readflex.models.entities.User;
+import com.example.groupe2.readflex.repositories.StoryRepository;
 import com.example.groupe2.readflex.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     SecurityService securityService;
+    @Autowired
+    private StoryRepository storyRepository;
 
     public List<User> getAllUsers(){
         List<User> _users = userRepository.findAll();
@@ -81,10 +85,7 @@ public class UserService {
             if(user.getEmail() != null) _user.setEmail(user.getEmail());
             if (user.getUsername() != null) _user.setUsername(user.getUsername());
             _user.setAdmin(user.isAdmin());
-//            if (user.getPassword() != null) {
-//                String hashedPassword = securityService.HashPassword (user.getPassword());
-//                _user.setPassword(hashedPassword);
-//            }
+
 
             return userRepository.save(_user);
         }
@@ -130,5 +131,25 @@ public class UserService {
             }
         }
         return result;
+    }
+
+    public void addStoryToFavorites(Long userId, Long storyId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        Optional<Story> storyOpt = storyRepository.findById(storyId);
+
+        if (userOpt.isPresent() && storyOpt.isPresent()) {
+            User user = userOpt.get();
+            Story story = storyOpt.get();
+
+            List<Story> favoriteStories = user.getFavorite_Stories();
+            if (!favoriteStories.contains(story)) {
+                favoriteStories.add(story);
+                user.setFavorite_Stories(favoriteStories);
+
+                userRepository.save(user);
+            }
+        } else {
+            throw new RuntimeException("Utilisateur ou histoire introuvable");
+        }
     }
 }
