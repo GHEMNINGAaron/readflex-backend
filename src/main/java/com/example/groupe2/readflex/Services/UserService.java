@@ -34,10 +34,6 @@ public class UserService {
     }
 
     public User getUserByEmail(String email){
-//
-//        return null;
-//        }
-//        else {
         if(!email.isBlank()) {
             Optional<User> user = userRepository.findByEmail(email);
             if(user.isPresent()) {
