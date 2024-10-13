@@ -64,5 +64,4 @@ public class StoryController {
         return new ResponseEntity<>(updatedStory, HttpStatus.OK);
     }
 
-
 }
