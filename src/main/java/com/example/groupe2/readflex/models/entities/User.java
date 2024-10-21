@@ -21,7 +21,7 @@ public class User {
     private String email;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "isAdmin", nullable = false, columnDefinition = "boolean default false")
+    @Column(name = "isAdmin", nullable = false)
     private boolean isAdmin;
 
     @ManyToMany
